@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  phone_number: MyString
+  open_time: 2024-04-18 12:13:53
+  close_time: 2024-04-18 12:13:53
+  address: MyString
+  city: one
+
+two:
+  name: MyString
+  phone_number: MyString
+  open_time: 2024-04-18 12:13:53
+  close_time: 2024-04-18 12:13:53
+  address: MyString
+  city: two

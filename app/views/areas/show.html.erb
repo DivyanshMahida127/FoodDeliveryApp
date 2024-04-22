@@ -1,0 +1,15 @@
+<% unless @restaurants.nil? %>
+    <div class="container">
+    <div class="d-flex row justify-content-center text-light overflow-auto">
+        <% @restaurants.each do |restaurant| %>
+                <div class="card text-bg-dark p-0 m-3 col-5 col-lg-3">
+                    <%= image_tag("3.jpg", class: "card-img img-fluid hover-shadow")%>
+                    <div class="card-img-overlay overflow-auto">
+                        <h5 class="card-title"><%= link_to restaurant.name, restaurant_path(restaurant), class: "text-decoration-none text-light" %></h5>
+                        <p class="card-text"><small><%= restaurant.address %> Hello World!!  Hello World!! Hello World!!  Hello World!!  Hello World!! </small></p>
+                    </div>
+                </div>
+        <% end %>
+    </div>
+    </div>
+<% end %>

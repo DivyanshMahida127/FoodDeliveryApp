@@ -1,0 +1,18 @@
+<h1> Your are navigating through states! </h1>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <% @states.each do |state| %>
+            <div class="card p-3 text-right col-9 col-sm-5 col-lg-3 m-3">
+                <blockquote class="blockquote mb-0">
+                <p><%= link_to state.name , state_path(state) %></p>
+                <footer class="blockquote-footer">
+                    <small class="text-muted">
+                        Multiple Restaurants and Cafe
+                    </small>
+                </footer>
+                </blockquote>
+            </div>
+        <% end %>
+    </div>
+</div>

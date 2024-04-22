@@ -1,0 +1,137 @@
+ActiveRecord::Schema[7.1].define(version: 2024_02_27_123555) do
+  create_table "cities", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "areas", force: :cascade do |t|
+    t.string "name"
+    t.integer "city_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["city_id"], name: "index_areas_on_city_id"
+  end
+
+  create_table "restaurants", force: :cascade do |t|
+    t.string "name"
+    t.integer "area_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["area_id"], name: "index_restaurants_on_area_id"
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "food_items", force: :cascade do |t|
+    t.integer "price",null: false
+    t.integer "restaurant_id", null: false
+    t.integer "category_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["restaurant_id"], name: "index_food_items_on_restaurant_id"
+    t.index ["category_id"], name: "index_food_items_on_category_id"
+  end
+
+  create_table "users",  force: :cascade do |t|
+    t.string "email"
+    t.string "password"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "user_profiles", force: :cascade do |t|
+    t.string "fullname"
+    t.string "phone_number"
+    t.string "description"
+    t.string "username"
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_user_profiles_on_user_id"
+  end
+
+  create_table "line_items", force: :cascade do |t|
+    t.integer "quantity", null: false 
+    t.integer "price",null: false
+    t.integer "user_id", null: false
+    t.integer "food_item_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "carts", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "line_item_id", null: false
+    t.integer "price",null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "cart_id", null: false
+    t.integer "price",null: false
+    t.string "address", null: false 
+    t.string "payment",null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
+
+  create_table "line_item_histories", force: :cascade do |t|
+    t.integer "quantity", null: false 
+    t.integer "price",null: false
+    t.integer "user_id", null: false
+    t.integer "food_item_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "cart_histories", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "line_item_history_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "order_histories", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "cart_history_id", null: false
+    t.integer "price",null: false
+    t.string "address", null: false 
+    t.string "payment",null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_orders_on_user_id"
+  end
+
+  add_foreign_key "line_item_histories", "users"
+  add_foreign_key "line_item_histories", "food_items"
+
+  add_foreign_key "cart_histories", "users"
+  add_foreign_key "cart_histories", "line_item_histories"
+
+  add_foreign_key "order_histories", "cart_histories"
+
+
+  add_foreign_key "areas", "city"
+  add_foreign_key "restaurants", "area"
+  add_foreign_key "user_profiles", "user"
+  add_foreign_key "orders","user"
+  add_foreign_key "food_items", "categories"
+  add_foreign_key "food_items", "restaurants"
+
+  add_foreign_key "line_items", "users"
+  add_foreign_key "line_items", "food_items"
+
+  add_foreign_key "carts", "users"
+  add_foreign_key "carts", "line_items"
+
+  add_foreign_key "orders", "carts"
+end

@@ -1,0 +1,24 @@
+<h1> You are currently searching for restaurants in <%= @city.name %> </h1>
+
+<h3> Popular localities in <%= @city.name %> </h3>
+<div class="container">
+    <div class="row justify-content-center">
+        <% unless @areas.nil? %>
+        <% @areas.each do |area| %>
+            <div class="card p-3 text-right col-9 col-sm-5 col-lg-3 m-3">
+                <blockquote class="blockquote mb-0">
+                <p><%= link_to area.name, area_path(area) %></p>
+                <footer class="blockquote-footer">
+                    <small class="text-muted">
+                        Multiple Restaurants and Cafe
+                    </small>
+                </footer>
+                </blockquote>
+            </div>
+        <% end %>
+        <% end %>
+    </div>
+</div>
+
+
+<h2> Some famous restaurant's in <%= @city.name %>
